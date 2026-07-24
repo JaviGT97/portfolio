@@ -1,30 +1,32 @@
 ---
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
 const certs = [
   {
     title: "HTML desde Cero",
     issuer: "Academia Midudev",
-    file: "/certificates/html-desde-cero-midudev.pdf",
+    file: `${base}/certificates/html-desde-cero-midudev.pdf`,
     gradient: "linear-gradient(135deg, #e44d26, #f16529)",
     year: "2025",
   },
   {
     title: "CSS desde Cero",
     issuer: "Academia Midudev",
-    file: "/certificates/css-desde-cero-midudev.pdf",
+    file: `${base}/certificates/css-desde-cero-midudev.pdf`,
     gradient: "linear-gradient(135deg, #264de4, #2965f1)",
     year: "2025",
   },
   {
     title: "Introducción a la IA para Developers",
     issuer: "Academia Midudev",
-    file: "/certificates/introduccion-ia-midudev.pdf",
+    file: `${base}/certificates/introduccion-ia-midudev.pdf`,
     gradient: "linear-gradient(135deg, #7c3aed, #a855f7)",
     year: "2025",
   },
   {
     title: "Curso Práctico de Django",
     issuer: "Udemy",
-    file: "/certificates/curso-practico-django.pdf",
+    file: `${base}/certificates/curso-practico-django.pdf`,
     gradient: "linear-gradient(135deg, #092e20, #44b78b)",
     year: "2025",
   },
