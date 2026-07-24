@@ -1,0 +1,350 @@
+---
+const certs = [
+  {
+    title: "HTML desde Cero",
+    issuer: "Academia Midudev",
+    file: "/certificates/html-desde-cero-midudev.pdf",
+    gradient: "linear-gradient(135deg, #e44d26, #f16529)",
+    year: "2025",
+  },
+  {
+    title: "CSS desde Cero",
+    issuer: "Academia Midudev",
+    file: "/certificates/css-desde-cero-midudev.pdf",
+    gradient: "linear-gradient(135deg, #264de4, #2965f1)",
+    year: "2025",
+  },
+  {
+    title: "Introducción a la IA para Developers",
+    issuer: "Academia Midudev",
+    file: "/certificates/introduccion-ia-midudev.pdf",
+    gradient: "linear-gradient(135deg, #7c3aed, #a855f7)",
+    year: "2025",
+  },
+  {
+    title: "Curso Práctico de Django",
+    issuer: "Udemy",
+    file: "/certificates/curso-practico-django.pdf",
+    gradient: "linear-gradient(135deg, #092e20, #44b78b)",
+    year: "2025",
+  },
+];
+---
+
+<section id="certificates">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Certificados</span>
+      <h2 class="section-title">Formación <span class="gradient-text">complementaria</span></h2>
+      <p class="section-desc">Cursos y certificaciones que avalan mis conocimientos. Haz clic para ver el detalle.</p>
+    </div>
+    <div class="certs-grid">
+      {certs.map((cert, i) => (
+        <div class="cert-card-wrapper reveal" style={`transition-delay: ${0.08 * i}s;`}>
+          <button class="cert-card" data-pdf={cert.file} data-title={cert.title}>
+            <div class="cert-top" style={`background: ${cert.gradient}`}>
+              <span class="cert-year">{cert.year}</span>
+              <div class="cert-icon-wrap">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              </div>
+              <div class="cert-shine"></div>
+            </div>
+            <div class="cert-body">
+              <h3 class="cert-title">{cert.title}</h3>
+              <p class="cert-issuer">{cert.issuer}</p>
+              <div class="cert-footer">
+                <span class="cert-action">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Vista previa
+                </span>
+                <span class="cert-dl-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </span>
+              </div>
+            </div>
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<div id="pdf-modal" class="modal">
+  <div class="modal-backdrop"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modal-title">Certificado</h3>
+      <div class="modal-actions">
+        <a id="modal-download" href="#" target="_blank" rel="noopener noreferrer" class="modal-btn" title="Descargar PDF">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <button id="modal-close" class="modal-btn" title="Cerrar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <iframe id="pdf-frame" src="" frameborder="0"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById("pdf-modal");
+  const frame = document.getElementById("pdf-frame");
+  const titleEl = document.getElementById("modal-title");
+  const downloadLink = document.getElementById("modal-download");
+  const closeBtn = document.getElementById("modal-close");
+  const backdrop = document.querySelector(".modal-backdrop");
+
+  document.querySelectorAll(".cert-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      const pdf = card.dataset.pdf;
+      const title = card.dataset.title;
+      frame.src = pdf;
+      titleEl.textContent = title;
+      downloadLink.href = pdf;
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  const closeModal = () => {
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+    setTimeout(() => { frame.src = ""; }, 400);
+  };
+
+  closeBtn.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>
+
+<style>
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .cert-card-wrapper {
+    perspective: 800px;
+  }
+
+  .cert-card {
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    transition: all 0.4s;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    display: block;
+  }
+
+  .cert-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-hover);
+    box-shadow: 0 12px 40px rgba(108, 108, 240, 0.1);
+  }
+
+  .cert-top {
+    position: relative;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .cert-shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cert-icon-wrap {
+    position: relative;
+    z-index: 1;
+    transform: scale(1);
+    transition: transform 0.4s;
+  }
+
+  .cert-card:hover .cert-icon-wrap {
+    transform: scale(1.1) rotate(-5deg);
+  }
+
+  .cert-year {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    font-size: 0.7rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 0.2rem 0.7rem;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    letter-spacing: 0.05em;
+  }
+
+  .cert-body {
+    padding: 1.25rem 1.5rem 1.25rem;
+  }
+
+  .cert-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+    line-height: 1.4;
+  }
+
+  .cert-issuer {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .cert-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .cert-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    transition: gap 0.3s;
+  }
+
+  .cert-card:hover .cert-action {
+    gap: 0.6rem;
+  }
+
+  .cert-dl-icon {
+    color: var(--text-muted);
+    transition: color 0.3s;
+  }
+
+  .cert-card:hover .cert-dl-icon {
+    color: var(--accent);
+  }
+
+  /* MODAL */
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    padding: 1rem;
+  }
+
+  .modal.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+  }
+
+  .modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 85vh;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.3s;
+  }
+
+  .modal.open .modal-content {
+    transform: scale(1) translateY(0);
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .modal-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .modal-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .modal-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(108, 108, 240, 0.08);
+  }
+
+  .modal-body {
+    flex: 1;
+    min-height: 0;
+  }
+
+  #pdf-frame {
+    width: 100%;
+    height: 100%;
+    background: white;
+  }
+
+  @media (max-width: 640px) {
+    .certs-grid { grid-template-columns: 1fr; }
+    .modal-content { height: 92vh; border-radius: var(--radius-sm); }
+  }
+</style>

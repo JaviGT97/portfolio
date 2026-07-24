@@ -1,0 +1,115 @@
+<section id="timeline">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Trayectoria</span>
+      <h2 class="section-title">Mi camino en el <span class="gradient-text">desarrollo</span></h2>
+      <p class="section-desc">De autodidacta a formarme como desarrollador profesional.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal" style="transition-delay: 0.05s;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2025 - Actualidad</span>
+          <h3>Desarrollo de Aplicaciones Web</h3>
+          <p>Formación oficial en tecnologías web modernas: frontend, backend, bases de datos y despliegue de aplicaciones.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal" style="transition-delay: 0.15s;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2025</span>
+          <h3>Curso Python - IBM</h3>
+          <p>Programa de formación oficial de IBM en Python. Ejercicios y proyectos prácticos completados.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal" style="transition-delay: 0.25s;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2025</span>
+          <h3>Academia Midudev</h3>
+          <p>Certificaciones en HTML, CSS e Introducción a la IA para Developers, reforzando las bases del desarrollo web.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal" style="transition-delay: 0.35s;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2020</span>
+          <h3>Inicio autodidacta</h3>
+          <p>Descubrí mi pasión por la programación de forma autodidacta, dando mis primeros pasos en el desarrollo de software.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+  }
+
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2rem;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    z-index: 1;
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+
+  .timeline-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: all 0.3s;
+  }
+
+  .timeline-content:hover {
+    border-color: var(--border-hover);
+    transform: translateX(4px);
+  }
+
+  .timeline-date {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-content h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0.4rem 0 0.5rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+</style>

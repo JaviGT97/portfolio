@@ -1,0 +1,199 @@
+<section id="about">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Sobre mí</span>
+      <h2 class="section-title">
+        Transformando ideas en <span class="gradient-text">código</span>
+      </h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal" style="transition-delay: 0.1s;">
+        <p>
+          Soy un programador apasionado por el aprendizaje continuo y el desarrollo de software.
+          Actualmente curso <strong>Desarrollo de Aplicaciones Web</strong>,
+          y empecé en 2020 de forma autodidacta.
+        </p>
+        <p>
+          Me encanta resolver problemas creando soluciones eficientes y bien diseñadas.
+          Serio y dedicado, siempre busco la excelencia en cada proyecto.
+        </p>
+        <p>
+          Estoy abierto a nuevas oportunidades laborales donde pueda aportar valor
+          y seguir creciendo profesionalmente.
+        </p>
+        <div class="about-cta">
+          <a href="#contact" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Hablemos
+          </a>
+          <a href="https://github.com/JaviGT97" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+      <div class="about-visual reveal" style="transition-delay: 0.2s;">
+        <div class="avatar-ring">
+          <div class="avatar">
+            <span class="avatar-initials">JG</span>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-num">7+</span>
+            <span class="stat-lbl">Proyectos</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">6</span>
+            <span class="stat-lbl">Tecnologías</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">5</span>
+            <span class="stat-lbl">Seguidores</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">22</span>
+            <span class="stat-lbl">Estrellas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .about-text strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .about-cta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    box-shadow: 0 4px 20px rgba(108, 108, 240, 0.3);
+  }
+
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(108, 108, 240, 0.4); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: rgba(108, 108, 240, 0.05); transform: translateY(-3px); }
+
+  /* Avatar */
+  .about-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .avatar-ring {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding: 4px;
+    background: conic-gradient(var(--accent), var(--accent2), var(--accent));
+    animation: spin 6s linear infinite;
+  }
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avatar-initials {
+    font-size: 3.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .stat-card:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .stat-num {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .stat-lbl {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+  }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .avatar-ring { width: 160px; height: 160px; }
+    .avatar-initials { font-size: 2.8rem; }
+  }
+</style>

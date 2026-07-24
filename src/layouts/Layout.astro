@@ -1,23 +1,257 @@
+---
+export interface Props {
+  title?: string;
+}
+
+const { title = "Javier Garrido Terrón | Portfolio" } = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Portfolio de Javier Garrido Terrón - Desarrollador de Software" />
+    <meta name="keywords" content="Javier Garrido Terrón, JaviGT97, portfolio, desarrollador, programador" />
+    <meta property="og:title" content="Javier Garrido Terrón | Portfolio" />
+    <meta property="og:description" content="Desarrollador de software apasionado por la programación" />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Scroll Reveal - Intersection Observer
+      const observe = () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("revealed");
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+        );
+
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      };
+
+      // Scroll Progress
+      const updateProgress = () => {
+        const bar = document.getElementById("scroll-progress");
+        if (!bar) return;
+        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        bar.style.width = `${(winScroll / height) * 100}%`;
+      };
+
+      // Nav active section
+      const updateActiveSection = () => {
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav-link");
+        let current = "";
+        sections.forEach((section) => {
+          const top = section.offsetTop - 120;
+          if (window.scrollY >= top) current = section.getAttribute("id");
+        });
+        navLinks.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
+        });
+      };
+
+      // Smooth scroll for nav
+      document.addEventListener("click", (e) => {
+        const link = e.target.closest('a[href^="#"]');
+        if (link) {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute("href"));
+          if (target) target.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+
+      const onLoad = () => {
+        observe();
+        updateProgress();
+        updateActiveSection();
+        window.addEventListener("scroll", () => {
+          updateProgress();
+          updateActiveSection();
+        });
+      };
+
+      if (document.readyState === "complete") onLoad();
+      else window.addEventListener("load", onLoad);
+    </script>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  :root {
+    --bg: #07070d;
+    --bg-secondary: #0c0c18;
+    --bg-card: rgba(18, 18, 30, 0.6);
+    --bg-card-hover: rgba(26, 26, 46, 0.8);
+    --text: #e8e8ed;
+    --text-secondary: #8888a0;
+    --text-muted: #5a5a72;
+    --accent: #6c6cf0;
+    --accent2: #a855f7;
+    --accent-glow: rgba(108, 108, 240, 0.15);
+    --border: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(108, 108, 240, 0.3);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --max-width: 1100px;
+    --transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: white; }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; height: auto; }
+
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+
+  section { padding: 6rem 0; position: relative; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    background: rgba(108, 108, 240, 0.08);
+    border: 1px solid rgba(108, 108, 240, 0.15);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  /* REVEAL ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .reveal-stagger.revealed > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-stagger > *:nth-child(1) { transition-delay: 0s; }
+  .reveal-stagger > *:nth-child(2) { transition-delay: 0.1s; }
+  .reveal-stagger > *:nth-child(3) { transition-delay: 0.2s; }
+  .reveal-stagger > *:nth-child(4) { transition-delay: 0.3s; }
+  .reveal-stagger > *:nth-child(5) { transition-delay: 0.4s; }
+  .reveal-stagger > *:nth-child(6) { transition-delay: 0.5s; }
+  .reveal-stagger > *:nth-child(7) { transition-delay: 0.6s; }
+  .reveal-stagger > *:nth-child(8) { transition-delay: 0.7s; }
+
+  /* Glow effect on section titles */
+  .section-title .gradient-text {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @media (max-width: 640px) {
+    section { padding: 4rem 0; }
+  }
 </style>
