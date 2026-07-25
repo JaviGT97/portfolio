@@ -2,14 +2,42 @@
   <div id="scroll-progress"></div>
   <div class="container nav-inner">
     <a href="#" class="logo">J<span class="logo-accent">G</span></a>
-    <div class="nav-links">
+    <button class="hamburger" id="hamburger" aria-label="Menú de navegación">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-links" id="nav-links">
       <a href="#about" class="nav-link">Sobre mí</a>
       <a href="#skills" class="nav-link">Skills</a>
       <a href="#projects" class="nav-link">Proyectos</a>
+      <a href="#timeline" class="nav-link">Trayectoria</a>
+      <a href="#certificates" class="nav-link">Certificados</a>
       <a href="#contact" class="nav-link">Contacto</a>
     </div>
   </div>
 </nav>
+
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("nav-links");
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      navLinks.classList.toggle("open");
+      document.body.classList.toggle("nav-open");
+    });
+
+    document.querySelectorAll(".nav-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        navLinks.classList.remove("open");
+        document.body.classList.remove("nav-open");
+      });
+    });
+  }
+</script>
 
 <style>
   nav {
@@ -52,6 +80,43 @@
     color: var(--accent);
   }
 
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1001;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s;
+    transform-origin: center;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
   .nav-links {
     display: flex;
     gap: 2.5rem;
@@ -86,8 +151,41 @@
     width: 100%;
   }
 
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(7, 7, 13, 0.95);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 1000;
+    }
+
+    .nav-links.open {
+      transform: translateX(0);
+    }
+
+    .nav-link {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+  }
+
   @media (max-width: 640px) {
-    .nav-links { gap: 1.25rem; }
-    .nav-link { font-size: 0.78rem; }
+    .nav-links { gap: 2rem; }
+    .nav-link { font-size: 1.1rem; }
   }
 </style>

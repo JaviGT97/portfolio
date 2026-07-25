@@ -4,6 +4,7 @@ export interface Props {
 }
 
 const { title = "Javier Garrido Terrón | Portfolio" } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -12,12 +13,15 @@ const { title = "Javier Garrido Terrón | Portfolio" } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
+    <link rel="canonical" href={canonical} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="Portfolio de Javier Garrido Terrón - Desarrollador de Software" />
-    <meta name="keywords" content="Javier Garrido Terrón, JaviGT97, portfolio, desarrollador, programador" />
+    <meta name="description" content="Portfolio de Javier Garrido Terrón - Desarrollador de Software. Especializado en desarrollo web y multiplataforma con Java, Kotlin, JavaScript y tecnologías web modernas." />
+    <meta name="keywords" content="Javier Garrido Terrón, JaviGT97, portfolio, desarrollador, programador, Java, Kotlin, web developer" />
+    <meta name="theme-color" content="#07070d" />
     <meta property="og:title" content="Javier Garrido Terrón | Portfolio" />
-    <meta property="og:description" content="Desarrollador de software apasionado por la programación" />
+    <meta property="og:description" content="Desarrollador de software apasionado por crear soluciones que marcan la diferencia." />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -26,8 +30,11 @@ const { title = "Javier Garrido Terrón | Portfolio" } = Astro.props;
   <body>
     <slot />
 
+    <button id="back-to-top" aria-label="Volver arriba">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
     <script>
-      // Scroll Reveal - Intersection Observer
       const observe = () => {
         const observer = new IntersectionObserver(
           (entries) => {
@@ -39,11 +46,9 @@ const { title = "Javier Garrido Terrón | Portfolio" } = Astro.props;
           },
           { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
         );
-
         document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
       };
 
-      // Scroll Progress
       const updateProgress = () => {
         const bar = document.getElementById("scroll-progress");
         if (!bar) return;
@@ -52,7 +57,6 @@ const { title = "Javier Garrido Terrón | Portfolio" } = Astro.props;
         bar.style.width = `${(winScroll / height) * 100}%`;
       };
 
-      // Nav active section
       const updateActiveSection = () => {
         const sections = document.querySelectorAll("section[id]");
         const navLinks = document.querySelectorAll(".nav-link");
@@ -66,7 +70,6 @@ const { title = "Javier Garrido Terrón | Portfolio" } = Astro.props;
         });
       };
 
-      // Smooth scroll for nav
       document.addEventListener("click", (e) => {
         const link = e.target.closest('a[href^="#"]');
         if (link) {
@@ -75,6 +78,16 @@ const { title = "Javier Garrido Terrón | Portfolio" } = Astro.props;
           if (target) target.scrollIntoView({ behavior: "smooth" });
         }
       });
+
+      const backToTop = document.getElementById("back-to-top");
+      if (backToTop) {
+        window.addEventListener("scroll", () => {
+          backToTop.classList.toggle("visible", window.scrollY > 400);
+        });
+        backToTop.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      }
 
       const onLoad = () => {
         observe();
@@ -178,7 +191,6 @@ const { title = "Javier Garrido Terrón | Portfolio" } = Astro.props;
     margin-bottom: 3rem;
   }
 
-  /* REVEAL ANIMATIONS */
   .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -188,39 +200,6 @@ const { title = "Javier Garrido Terrón | Portfolio" } = Astro.props;
   .reveal.revealed {
     opacity: 1;
     transform: translateY(0);
-  }
-
-  .reveal-left {
-    opacity: 0;
-    transform: translateX(-40px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal-left.revealed {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .reveal-right {
-    opacity: 0;
-    transform: translateX(40px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal-right.revealed {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .reveal-scale {
-    opacity: 0;
-    transform: scale(0.92);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal-scale.revealed {
-    opacity: 1;
-    transform: scale(1);
   }
 
   .reveal-stagger > * {
@@ -243,12 +222,42 @@ const { title = "Javier Garrido Terrón | Portfolio" } = Astro.props;
   .reveal-stagger > *:nth-child(7) { transition-delay: 0.6s; }
   .reveal-stagger > *:nth-child(8) { transition-delay: 0.7s; }
 
-  /* Glow effect on section titles */
   .section-title .gradient-text {
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  #back-to-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s, border-color 0.3s, color 0.3s;
+    z-index: 999;
+    backdrop-filter: blur(12px);
+  }
+
+  #back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #back-to-top:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
   @media (max-width: 640px) {

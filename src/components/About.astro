@@ -10,17 +10,32 @@
       <div class="about-text reveal" style="transition-delay: 0.1s;">
         <p>
           Soy un programador apasionado por el aprendizaje continuo y el desarrollo de software.
-          Actualmente curso <strong>Desarrollo de Aplicaciones Web</strong>,
-          y empecé en 2020 de forma autodidacta.
+          Actualmente curso <strong>Desarrollo de Aplicaciones Web</strong>
+          para formalizar y expandir mis conocimientos, que comencé a construir de forma autodidacta en 2020.
         </p>
         <p>
-          Me encanta resolver problemas creando soluciones eficientes y bien diseñadas.
-          Serio y dedicado, siempre busco la excelencia en cada proyecto.
+          Me especializo en <strong>Java</strong>, <strong>Kotlin</strong>, <strong>JavaScript</strong> y tecnologías web modernas.
+          Disfruto enfrentándome a problemas complejos y transformándolos en soluciones limpias, eficientes y bien diseñadas.
         </p>
         <p>
           Estoy abierto a nuevas oportunidades laborales donde pueda aportar valor
-          y seguir creciendo profesionalmente.
+          y seguir creciendo profesionalmente. Me considero una persona seria, dedicada
+          y comprometida con la excelencia en cada proyecto que emprendo.
         </p>
+        <div class="tech-stack">
+          <span class="tech-stack-label">Stack principal</span>
+          <div class="tech-stack-tags">
+            <span>Java</span>
+            <span>Kotlin</span>
+            <span>JavaScript</span>
+            <span>Python</span>
+            <span>HTML/CSS</span>
+            <span>Astro</span>
+            <span>Node.js</span>
+            <span>MySQL</span>
+            <span>Git</span>
+          </div>
+        </div>
         <div class="about-cta">
           <a href="#contact" class="btn btn-primary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -44,12 +59,12 @@
             <span class="stat-lbl">Proyectos</span>
           </div>
           <div class="stat-card">
-            <span class="stat-num">6</span>
+            <span class="stat-num">9</span>
             <span class="stat-lbl">Tecnologías</span>
           </div>
           <div class="stat-card">
-            <span class="stat-num">5</span>
-            <span class="stat-lbl">Seguidores</span>
+            <span class="stat-num">4</span>
+            <span class="stat-lbl">Certificados</span>
           </div>
           <div class="stat-card">
             <span class="stat-num">22</span>
@@ -79,6 +94,43 @@
   .about-text strong {
     color: var(--text);
     font-weight: 600;
+  }
+
+  .tech-stack {
+    margin: 1.5rem 0;
+  }
+
+  .tech-stack-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .tech-stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .tech-stack-tags span {
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    background: rgba(108, 108, 240, 0.06);
+    color: var(--text);
+    border: 1px solid rgba(108, 108, 240, 0.1);
+    transition: all 0.3s;
+  }
+
+  .tech-stack-tags span:hover {
+    background: rgba(108, 108, 240, 0.12);
+    border-color: rgba(108, 108, 240, 0.25);
+    transform: translateY(-1px);
   }
 
   .about-cta {
@@ -117,7 +169,6 @@
 
   .btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: rgba(108, 108, 240, 0.05); transform: translateY(-3px); }
 
-  /* Avatar */
   .about-visual {
     display: flex;
     flex-direction: column;
@@ -155,7 +206,6 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Stats */
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
