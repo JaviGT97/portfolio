@@ -1,60 +1,127 @@
 <section id="hero">
   <div class="hero-bg" aria-hidden="true">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+    <canvas id="particle-canvas"></canvas>
+    <div class="gradient-mesh">
+      <div class="mesh-orb mesh-1"></div>
+      <div class="mesh-orb mesh-2"></div>
+      <div class="mesh-orb mesh-3"></div>
+    </div>
     <div class="grid-lines"></div>
-    <!-- Floating code snippets -->
     <div class="code-float cf1 mono">&lt;dev /&gt;</div>
     <div class="code-float cf2 mono">&#123; code &#125;</div>
     <div class="code-float cf3 mono">npm run build</div>
-    <div class="code-float cf4 mono">git push</div>
+    <div class="code-float cf4 mono">git push origin main</div>
+    <div class="code-float cf5 mono">console.log("hi")</div>
   </div>
 
   <div class="container hero-content">
     <div class="hero-text">
       <div class="hero-badge">
+        <span class="badge-pulse"></span>
         <span class="badge-dot"></span>
         <span data-i18n="hero.available">Disponible para nuevas oportunidades</span>
       </div>
       <p class="hero-greeting mono">&gt; <span data-i18n="hero.greeting">Hola, soy</span></p>
       <h1>
-        <span class="name-first">Javier Garrido</span>
-        <span class="name-last gradient-text">Terrón</span>
+        <span class="name-line name-first">Javier Garrido</span>
+        <span class="name-line name-last"><span class="gradient-text">Terrón</span></span>
       </h1>
       <div class="typing-wrapper">
         <span class="typing-static" data-i18n="hero.developer">Desarrollador</span>
         <span class="typing-dynamic" id="typing"></span>
-        <span class="typing-cursor">|</span>
+        <span class="typing-cursor">_</span>
       </div>
-      <p class="hero-desc" data-i18n="hero.desc">
-        Construyo software que importa — desde backends robustos hasta interfaces
-        modernas con atención al detalle. Apasionado por el código limpio y el diseño funcional.
+      <p class="hero-desc">
+        Desarrollador full stack con obsesión por el detalle. Transformo ideas complejas
+        en productos digitales limpios, rápidos y que la gente realmente quiere usar.
       </p>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">
+        <a href="#proyectos" class="btn btn-primary">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
           <span data-i18n="hero.cta.projects">Ver proyectos</span>
         </a>
-        <a href="#contact" class="btn btn-outline">
+        <a href="#contacto" class="btn btn-outline">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           <span data-i18n="hero.cta.contact">Contactar</span>
         </a>
         <a href="https://github.com/JaviGT97" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" title="GitHub">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
         </a>
       </div>
 
-      <!-- Animated scroll hint -->
-      <div class="scroll-hint">
-        <div class="scroll-line"></div>
-        <span data-i18n="hero.scroll">Explora</span>
-      </div>
     </div>
   </div>
 </section>
 
 <script>
+  // Particle system
+  const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let particles: { x: number; y: number; vx: number; vy: number; size: number; opacity: number }[] = [];
+    let animId: number;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    if (!prefersReducedMotion) {
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          size: Math.random() * 1.5 + 0.5,
+          opacity: Math.random() * 0.4 + 0.1,
+        });
+      }
+
+      function animate() {
+        ctx!.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+          ctx!.beginPath();
+          ctx!.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(0, 212, 170, ${p.opacity})`;
+          ctx!.fill();
+        });
+        // Draw connections
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 150) {
+              ctx!.beginPath();
+              ctx!.moveTo(particles[i].x, particles[i].y);
+              ctx!.lineTo(particles[j].x, particles[j].y);
+              ctx!.strokeStyle = `rgba(0, 212, 170, ${0.06 * (1 - dist / 150)})`;
+              ctx!.stroke();
+            }
+          }
+        }
+        animId = requestAnimationFrame(animate);
+      }
+      animate();
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(animId);
+        else animate();
+      });
+    }
+  }
+
+  // Typing effect
   const wordsES = ["Full Stack", "de Software", "Backend", "Frontend", "Multiplataforma"];
   const wordsEN = ["Full Stack", "Software", "Backend", "Frontend", "Cross-Platform"];
   let wordIndex = 0;
@@ -101,83 +168,96 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 66px;
+    padding-top: var(--nav-height);
     position: relative;
     overflow: hidden;
   }
 
-  /* Background */
   .hero-bg {
     position: absolute;
     inset: 0;
     pointer-events: none;
   }
 
-  .orb {
+  #particle-canvas {
     position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    animation: drift 25s infinite ease-in-out;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  .orb-1 {
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, transparent 70%);
-    top: -20%; right: -10%;
+  /* Gradient Mesh */
+  .gradient-mesh {
+    position: absolute;
+    inset: 0;
+  }
+
+  .mesh-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    animation: meshDrift 20s infinite ease-in-out;
+  }
+
+  .mesh-1 {
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(0, 212, 170, 0.18) 0%, transparent 70%);
+    top: -25%; right: -15%;
     animation-delay: 0s;
   }
 
-  .orb-2 {
-    width: 450px; height: 450px;
-    background: radial-gradient(circle, rgba(129, 140, 248, 0.14) 0%, transparent 70%);
-    bottom: -15%; left: -8%;
-    animation-delay: -9s;
+  .mesh-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+    bottom: -20%; left: -10%;
+    animation-delay: -7s;
   }
 
-  .orb-3 {
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(244, 114, 182, 0.10) 0%, transparent 70%);
-    top: 40%; left: 40%;
-    animation-delay: -17s;
+  .mesh-3 {
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(124, 92, 255, 0.08) 0%, transparent 70%);
+    top: 35%; left: 35%;
+    animation-delay: -14s;
+  }
+
+  @keyframes meshDrift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25%  { transform: translate(60px, -70px) scale(1.08); }
+    50%  { transform: translate(-40px, 40px) scale(0.92); }
+    75%  { transform: translate(70px, 50px) scale(1.05); }
   }
 
   .grid-lines {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(56, 189, 248, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(56, 189, 248, 0.025) 1px, transparent 1px);
-    background-size: 60px 60px;
+      linear-gradient(rgba(0, 212, 170, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 170, 0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
     mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%);
   }
 
-  /* Floating code snippets */
+  /* Floating code */
   .code-float {
     position: absolute;
     font-size: 0.7rem;
-    color: rgba(56, 189, 248, 0.15);
+    color: rgba(0, 212, 170, 0.12);
     letter-spacing: 0.04em;
     pointer-events: none;
     user-select: none;
     animation: floatCode 20s infinite ease-in-out;
   }
 
-  .cf1 { top: 18%; right: 12%; animation-delay: 0s;   animation-duration: 22s; }
-  .cf2 { top: 65%; right: 6%;  animation-delay: -5s;  animation-duration: 18s; }
-  .cf3 { top: 35%; right: 28%; animation-delay: -11s; animation-duration: 24s; }
-  .cf4 { top: 78%; right: 20%; animation-delay: -7s;  animation-duration: 20s; }
+  .cf1 { top: 15%; right: 10%; animation-delay: 0s; animation-duration: 22s; }
+  .cf2 { top: 60%; right: 5%; animation-delay: -5s; animation-duration: 18s; }
+  .cf3 { top: 30%; right: 25%; animation-delay: -11s; animation-duration: 24s; }
+  .cf4 { top: 75%; right: 18%; animation-delay: -7s; animation-duration: 20s; }
+  .cf5 { top: 45%; right: 35%; animation-delay: -15s; animation-duration: 26s; }
 
   @keyframes floatCode {
     0%, 100% { transform: translateY(0) rotate(-1deg); opacity: 0.5; }
-    25%       { transform: translateY(-12px) rotate(1deg); opacity: 0.8; }
-    75%       { transform: translateY(10px) rotate(-2deg); opacity: 0.3; }
-  }
-
-  @keyframes drift {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25%  { transform: translate(40px, -50px) scale(1.06); }
-    50%  { transform: translate(-25px, 25px) scale(0.94); }
-    75%  { transform: translate(50px, 40px) scale(1.03); }
+    25%       { transform: translateY(-18px) rotate(1.5deg); opacity: 0.8; }
+    75%       { transform: translateY(14px) rotate(-2.5deg); opacity: 0.3; }
   }
 
   /* Content */
@@ -187,168 +267,209 @@
     width: 100%;
   }
 
-  .hero-text { max-width: 740px; }
+  .hero-text { max-width: 800px; }
 
+  /* Badge */
   .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     font-size: 0.8rem;
     font-weight: 500;
     color: #4ade80;
     background: rgba(74, 222, 128, 0.06);
     border: 1px solid rgba(74, 222, 128, 0.18);
-    padding: 0.35rem 1rem;
+    padding: 0.4rem 1.1rem;
     border-radius: 100px;
-    margin-bottom: 1.75rem;
-    animation: fadeUp 0.6s ease both;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.7s ease both;
+    position: relative;
+  }
+
+  .badge-pulse {
+    position: absolute;
+    inset: -2px;
+    border-radius: 100px;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    animation: badgePulse 3s infinite;
+  }
+
+  @keyframes badgePulse {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.04); }
   }
 
   .badge-dot {
     width: 7px; height: 7px;
     border-radius: 50%;
     background: #4ade80;
-    box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
-    animation: pulse 2s infinite;
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.6);
+    animation: dotPulse 2s infinite;
   }
 
-  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes dotPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
   .hero-greeting {
-    font-size: 1rem;
-    color: var(--accent);
+    font-size: 1.05rem;
+    color: var(--accent-primary);
     font-weight: 500;
-    margin-bottom: 0.5rem;
-    animation: fadeUp 0.6s ease 0.1s both;
+    margin-bottom: 0.75rem;
+    animation: fadeUp 0.7s ease 0.1s both;
     letter-spacing: 0.02em;
   }
 
   h1 {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1.25rem;
-    animation: fadeUp 0.6s ease 0.2s both;
+    margin-bottom: 1.5rem;
+  }
+
+  .name-line {
+    display: block;
+    overflow: hidden;
   }
 
   .name-first {
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    font-weight: 900;
+    font-size: clamp(3.2rem, 8vw, 5.8rem);
+    font-weight: 800;
     letter-spacing: -0.04em;
-    line-height: 1.02;
-    color: var(--text);
+    line-height: 1.05;
+    color: var(--fg-primary);
+    animation: nameReveal 0.8s ease 0.15s both;
   }
 
   .name-last {
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    font-weight: 900;
+    font-size: clamp(3.2rem, 8vw, 5.8rem);
+    font-weight: 800;
     letter-spacing: -0.04em;
-    line-height: 1.02;
+    line-height: 1.05;
+    animation: nameReveal 0.8s ease 0.25s both;
+  }
+
+  @keyframes nameReveal {
+    from { opacity: 0; transform: translateY(100%); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .typing-wrapper {
-    font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-    color: var(--text-secondary);
-    margin-bottom: 1.75rem;
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+    color: var(--fg-secondary);
+    margin-bottom: 2rem;
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.4rem;
     flex-wrap: wrap;
-    animation: fadeUp 0.6s ease 0.3s both;
+    animation: fadeUp 0.7s ease 0.4s both;
   }
 
   .typing-static { font-weight: 500; }
-  .typing-dynamic { color: var(--accent); font-weight: 700; min-width: 20px; }
-  .typing-cursor { color: var(--accent); font-weight: 300; animation: blink 1s step-end infinite; }
+  .typing-dynamic { color: var(--accent-primary); font-weight: 700; min-width: 20px; }
+  .typing-cursor {
+    color: var(--accent-primary);
+    font-weight: 300;
+    animation: blink 1s step-end infinite;
+    font-family: var(--font-display);
+  }
 
   @keyframes blink { 50% { opacity: 0; } }
 
   .hero-desc {
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-    max-width: 540px;
-    line-height: 1.75;
-    margin-bottom: 2.25rem;
-    font-weight: 400;
-    animation: fadeUp 0.6s ease 0.4s both;
+    font-size: 1.1rem;
+    color: var(--fg-secondary);
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.7s ease 0.5s both;
   }
 
   .hero-actions {
     display: flex;
-    gap: 0.85rem;
+    gap: 1rem;
     flex-wrap: wrap;
     align-items: center;
-    animation: fadeUp 0.6s ease 0.5s both;
+    animation: fadeUp 0.7s ease 0.6s both;
   }
 
   .btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.8rem 1.75rem;
-    border-radius: var(--radius-sm);
+    padding: 0.85rem 1.85rem;
+    border-radius: var(--radius-md);
     font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s;
+    font-size: 0.92rem;
+    transition: all var(--transition-base);
     cursor: pointer;
     border: 1px solid transparent;
     font-family: inherit;
+    position: relative;
+    overflow: hidden;
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: #050510;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #fff;
     font-weight: 700;
-    box-shadow: 0 4px 24px rgba(56, 189, 248, 0.25);
+    box-shadow: 0 4px 24px rgba(0, 212, 170, 0.25);
   }
 
-  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(56, 189, 248, 0.35); }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .btn-primary:hover::before { opacity: 1; }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 36px rgba(0, 212, 170, 0.35); }
+  .btn-primary svg, .btn-primary span { position: relative; z-index: 1; }
 
   .btn-outline {
     background: transparent;
-    color: var(--text);
-    border-color: var(--border);
+    color: var(--fg-primary);
+    border-color: var(--border-default);
+    backdrop-filter: blur(8px);
   }
 
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(56, 189, 248, 0.06); transform: translateY(-3px); }
+  .btn-outline:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background: rgba(0, 212, 170, 0.06);
+    transform: translateY(-3px);
+  }
 
   .btn-ghost {
-    padding: 0.8rem;
+    padding: 0.85rem;
     background: transparent;
-    color: var(--text-secondary);
-    border-color: var(--border);
+    color: var(--fg-secondary);
+    border-color: var(--border-default);
+    border-radius: var(--radius-md);
   }
 
-  .btn-ghost:hover { color: var(--text); border-color: var(--border-hover); background: rgba(255,255,255,0.04); transform: translateY(-2px); }
-
-  /* Scroll hint */
-  .scroll-hint {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-top: 3.5rem;
-    animation: fadeUp 0.6s ease 0.7s both;
-  }
-
-  .scroll-line {
-    width: 40px;
-    height: 1px;
-    background: linear-gradient(90deg, var(--accent), transparent);
-    position: relative;
-  }
-
-  .scroll-hint span {
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--text-muted);
+  .btn-ghost:hover {
+    color: var(--fg-primary);
+    border-color: var(--border-accent);
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-2px);
   }
 
   @media (max-width: 640px) {
     .hero-actions { flex-direction: column; align-items: stretch; }
     .btn { justify-content: center; }
-    .btn-ghost { align-self: center; width: 44px; height: 44px; justify-content: center; }
+    .btn-ghost { align-self: center; width: 48px; height: 48px; justify-content: center; }
     .code-float { display: none; }
+    .hero-desc { font-size: 1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mesh-orb, .code-float, .badge-pulse, .badge-dot, .typing-cursor { animation: none; }
+    .name-first, .name-last, .hero-badge, .hero-greeting, .typing-wrapper, .hero-desc, .hero-actions {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
   }
 </style>

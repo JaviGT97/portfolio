@@ -65,7 +65,7 @@ const certs = [
 ];
 ---
 
-<section id="certificates">
+<section id="certificados">
   <div class="container">
     <div class="reveal">
       <span class="section-label" data-i18n="certs.label">Certificados</span>
@@ -173,11 +173,11 @@ const certs = [
     width: 100%;
     text-align: left;
     cursor: pointer;
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--bg-card);
-    border: 1px solid var(--border);
-    transition: all 0.4s;
+    border: 1px solid var(--border-default);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     padding: 0;
     font: inherit;
     color: inherit;
@@ -186,8 +186,8 @@ const certs = [
 
   .cert-card:hover {
     transform: translateY(-6px);
-    border-color: var(--border-hover);
-    box-shadow: 0 16px 48px rgba(56, 189, 248, 0.1);
+    border-color: var(--border-accent);
+    box-shadow: 0 20px 56px rgba(0, 0, 0, 0.2);
   }
 
   .cert-visual {
@@ -216,7 +216,7 @@ const certs = [
     border-radius: 4px;
     backdrop-filter: blur(6px);
     letter-spacing: 0.05em;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-display);
   }
 
   .cert-monogram {
@@ -226,7 +226,7 @@ const certs = [
     font-weight: 900;
     color: rgba(255,255,255,0.08);
     line-height: 1;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-display);
     pointer-events: none;
     user-select: none;
   }
@@ -235,7 +235,7 @@ const certs = [
     position: relative;
     z-index: 1;
     transform: scale(1);
-    transition: transform 0.4s;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   .cert-card:hover .cert-pdf-icon { transform: scale(1.1) rotate(-8deg); }
@@ -250,13 +250,13 @@ const certs = [
   .cert-title {
     font-size: 0.88rem;
     font-weight: 700;
-    color: var(--text);
+    color: var(--fg-primary);
     line-height: 1.4;
   }
 
   .cert-issuer {
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: var(--fg-muted);
     margin-top: 0.12rem;
   }
 
@@ -265,7 +265,7 @@ const certs = [
     align-items: center;
     justify-content: space-between;
     padding-top: 0.65rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--border-subtle);
   }
 
   .cert-view {
@@ -274,19 +274,19 @@ const certs = [
     gap: 0.35rem;
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--accent);
+    color: var(--accent-primary);
     transition: gap 0.3s;
   }
 
   .cert-card:hover .cert-view { gap: 0.6rem; }
 
   .cert-dl {
-    color: var(--text-muted);
+    color: var(--fg-muted);
     transition: color 0.3s;
     display: flex;
   }
 
-  .cert-card:hover .cert-dl { color: var(--accent); }
+  .cert-card:hover .cert-dl { color: var(--accent-primary); }
 
   /* Modal */
   .modal {
@@ -307,8 +307,8 @@ const certs = [
   .modal-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(10px);
+    background: rgba(5, 5, 8, 0.8);
+    backdrop-filter: blur(12px);
   }
 
   .modal-content {
@@ -316,14 +316,15 @@ const certs = [
     width: 100%;
     max-width: 900px;
     height: 85vh;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     transform: scale(0.95) translateY(16px);
-    transition: transform 0.3s;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
   }
 
   .modal.open .modal-content { transform: scale(1) translateY(0); }
@@ -333,7 +334,7 @@ const certs = [
     align-items: center;
     justify-content: space-between;
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-subtle);
     flex-shrink: 0;
   }
 
@@ -342,10 +343,10 @@ const certs = [
 
   .modal-btn {
     width: 34px; height: 34px;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-secondary);
+    border: 1px solid var(--border-default);
+    color: var(--fg-secondary);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -355,9 +356,9 @@ const certs = [
   }
 
   .modal-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(56, 189, 248, 0.08);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background: rgba(0, 212, 170, 0.08);
   }
 
   .modal-body { flex: 1; min-height: 0; }
@@ -365,7 +366,7 @@ const certs = [
 
   @media (max-width: 640px) {
     .certs-grid { grid-template-columns: 1fr 1fr; }
-    .modal-content { height: 92vh; border-radius: var(--radius-sm); }
+    .modal-content { height: 92vh; border-radius: var(--radius-md); }
   }
 
   @media (max-width: 420px) {
