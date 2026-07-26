@@ -15,8 +15,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" type="image/svg+xml" href="/portfolio/favicon.svg" />
     <link rel="canonical" href={canonical} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="Portfolio de Javier Garrido Terrón — Desarrollador de Software especializado en Java, Kotlin, JavaScript y tecnologías web modernas. Disponible para nuevas oportunidades." />
-    <meta name="keywords" content="Javier Garrido Terrón, JaviGT97, portfolio, desarrollador, programador, Java, Kotlin, web developer, Android, full stack" />
+    <meta name="description" content="Portfolio de Javier Garrido Terrón — Desarrollador de Software especializado en Java, Kotlin, JavaScript y tecnologías web modernas." />
+    <meta name="keywords" content="Javier Garrido Terrón, JaviGT97, portfolio, desarrollador, programador, Java, Kotlin, web developer" />
     <meta name="theme-color" content="#050510" />
     <meta property="og:title" content="Javier Garrido Terrón | Desarrollador de Software" />
     <meta property="og:description" content="Desarrollador de software apasionado por construir soluciones elegantes y escalables." />
@@ -30,20 +30,42 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <body>
     <slot />
 
+    <!-- Back to top -->
     <button id="back-to-top" aria-label="Volver arriba">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
     </button>
 
+    <!-- Animated SVG aurora background (subtle, global) -->
+    <div class="aurora-bg" aria-hidden="true">
+      <svg class="aurora-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <filter id="aurora-blur">
+            <feGaussianBlur stdDeviation="40"/>
+          </filter>
+          <radialGradient id="ag1" cx="20%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.07"/>
+            <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="ag2" cx="80%" cy="30%" r="50%">
+            <stop offset="0%" stop-color="#818cf8" stop-opacity="0.06"/>
+            <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="ag3" cx="60%" cy="80%" r="40%">
+            <stop offset="0%" stop-color="#f472b6" stop-opacity="0.05"/>
+            <stop offset="100%" stop-color="#f472b6" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <ellipse class="aurora-a" cx="240" cy="300" rx="500" ry="260" fill="url(#ag1)" filter="url(#aurora-blur)"/>
+        <ellipse class="aurora-b" cx="960" cy="180" rx="420" ry="220" fill="url(#ag2)" filter="url(#aurora-blur)"/>
+        <ellipse class="aurora-c" cx="720" cy="480" rx="380" ry="200" fill="url(#ag3)" filter="url(#aurora-blur)"/>
+      </svg>
+    </div>
+
     <script>
+      /* ─── Scroll / reveal / progress / back-to-top ─── */
       const observe = () => {
         const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("revealed");
-              }
-            });
-          },
+          (entries) => { entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("revealed"); }); },
           { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
         );
         document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
@@ -52,84 +74,258 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       const updateProgress = () => {
         const bar = document.getElementById("scroll-progress");
         if (!bar) return;
-        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        bar.style.width = `${(winScroll / height) * 100}%`;
+        const top = document.documentElement.scrollTop || document.body.scrollTop;
+        const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        bar.style.width = `${(top / h) * 100}%`;
       };
 
       const updateActiveSection = () => {
         const sections = document.querySelectorAll("section[id]");
         const navLinks = document.querySelectorAll(".nav-link");
         let current = "";
-        sections.forEach((section) => {
-          const top = (section as HTMLElement).offsetTop - 120;
-          if (window.scrollY >= top) current = section.getAttribute("id") ?? "";
-        });
-        navLinks.forEach((link) => {
-          link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
-        });
+        sections.forEach((s) => { if (window.scrollY >= (s as HTMLElement).offsetTop - 120) current = s.getAttribute("id") ?? ""; });
+        navLinks.forEach((l) => l.classList.toggle("active", l.getAttribute("href") === `#${current}`));
       };
 
       document.addEventListener("click", (e) => {
         const link = (e.target as Element).closest('a[href^="#"]');
         if (link) {
           e.preventDefault();
-          const target = document.querySelector(link.getAttribute("href") ?? "");
-          if (target) target.scrollIntoView({ behavior: "smooth" });
+          document.querySelector(link.getAttribute("href") ?? "")?.scrollIntoView({ behavior: "smooth" });
         }
       });
 
-      const backToTop = document.getElementById("back-to-top");
-      if (backToTop) {
-        window.addEventListener("scroll", () => {
-          backToTop.classList.toggle("visible", window.scrollY > 400);
-        });
-        backToTop.addEventListener("click", () => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
+      const btt = document.getElementById("back-to-top");
+      if (btt) {
+        window.addEventListener("scroll", () => btt.classList.toggle("visible", window.scrollY > 400));
+        btt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
       }
 
       const onLoad = () => {
         observe();
         updateProgress();
         updateActiveSection();
-        window.addEventListener("scroll", () => {
-          updateProgress();
-          updateActiveSection();
-        });
+        window.addEventListener("scroll", () => { updateProgress(); updateActiveSection(); });
       };
 
       if (document.readyState === "complete") onLoad();
       else window.addEventListener("load", onLoad);
+
+      /* ─── i18n engine ─── */
+      const translations: Record<string, Record<string, string>> = {
+        es: {
+          /* Nav */
+          "nav.about": "Sobre mí",
+          "nav.skills": "Skills",
+          "nav.projects": "Proyectos",
+          "nav.timeline": "Trayectoria",
+          "nav.certs": "Certificados",
+          "nav.contact": "Contactar",
+          /* Hero */
+          "hero.available": "Disponible para nuevas oportunidades",
+          "hero.greeting": "Hola, soy",
+          "hero.developer": "Desarrollador",
+          "hero.desc": "Construyo software que importa — desde backends robustos hasta interfaces modernas con atención al detalle. Apasionado por el código limpio y el diseño funcional.",
+          "hero.cta.projects": "Ver proyectos",
+          "hero.cta.contact": "Contactar",
+          "hero.scroll": "Explora",
+          /* About */
+          "about.label": "Sobre mí",
+          "about.title": "Código con",
+          "about.title.hl": "propósito",
+          "about.p1": "Soy un desarrollador de software con <strong>más de 5 años de experiencia autodidacta</strong> y actualmente cursando <strong>Desarrollo de Aplicaciones Web</strong> para fortalecer y formalizar mis conocimientos técnicos.",
+          "about.p2": "Me especializo en <strong>Java</strong>, <strong>Kotlin</strong> y <strong>JavaScript</strong>, construyendo tanto aplicaciones backend robustas como interfaces web modernas. Disfruto especialmente enfrentando problemas complejos y convirtiéndolos en soluciones limpias y mantenibles.",
+          "about.p3": "Busco activamente incorporarme a un equipo donde pueda aportar valor real desde el primer día, seguir creciendo profesionalmente y trabajar en proyectos con impacto.",
+          "about.v1": "Código limpio y mantenible",
+          "about.v2": "Aprendizaje continuo",
+          "about.v3": "Atención al detalle",
+          "about.v4": "Trabajo en equipo",
+          "about.stack.label": "Stack principal",
+          "about.cta.talk": "Hablemos",
+          "about.stat1.lbl": "Años programando",
+          "about.stat2.lbl": "Proyectos",
+          "about.stat3.lbl": "Tecnologías",
+          "about.stat4.lbl": "Certificados",
+          /* Skills */
+          "skills.label": "Habilidades",
+          "skills.title": "Mi stack",
+          "skills.title.hl": "tecnológico",
+          "skills.desc": "Tecnologías y herramientas que domino para construir soluciones completas de extremo a extremo.",
+          "skills.langs": "Lenguajes",
+          "skills.frameworks": "Frameworks & Libs",
+          "skills.databases": "Bases de datos",
+          "skills.tools": "Herramientas",
+          /* Projects */
+          "projects.label": "Proyectos",
+          "projects.title": "Trabajos",
+          "projects.title.hl": "destacados",
+          "projects.desc": "Proyectos reales construidos con código abierto. Filtra por tecnología o explóralos todos.",
+          "projects.filter.all": "Todos",
+          "projects.code": "Código",
+          "projects.demo": "Ver demo",
+          "projects.featured": "★ Destacado",
+          /* Timeline */
+          "tl.label": "Trayectoria",
+          "tl.title": "Mi camino en el",
+          "tl.title.hl": "desarrollo",
+          "tl.desc": "De autodidacta curioso a desarrollador profesional con formación técnica formal.",
+          "tl.ongoing": "En curso",
+          "tl.cert": "Certificado",
+          /* Certificates */
+          "certs.label": "Certificados",
+          "certs.title.hl": "acreditada",
+          "certs.desc": "Certificaciones oficiales que validan mis conocimientos. Haz clic para ver el certificado completo.",
+          "certs.view": "Ver certificado",
+          /* Contact */
+          "contact.label": "Contacto",
+          "contact.title": "¿Listo para",
+          "contact.title.hl": "trabajar juntos",
+          "contact.title.after": "?",
+          "contact.desc": "Estoy abierto a nuevas oportunidades, proyectos freelance y colaboraciones. No dudes en escribirme — respondo en menos de 24h.",
+          "contact.email.desc": "javiergarridoterron@gmail.com",
+          "contact.linkedin.desc": "Conecta conmigo profesionalmente",
+          "contact.github.desc": "Explora mi código y proyectos",
+          "contact.footer": "¿Tienes un proyecto en mente o una oferta? Escríbeme directamente a",
+        },
+        en: {
+          /* Nav */
+          "nav.about": "About",
+          "nav.skills": "Skills",
+          "nav.projects": "Projects",
+          "nav.timeline": "Timeline",
+          "nav.certs": "Certificates",
+          "nav.contact": "Contact",
+          /* Hero */
+          "hero.available": "Open to new opportunities",
+          "hero.greeting": "Hi, I'm",
+          "hero.developer": "Developer",
+          "hero.desc": "I build software that matters — from robust backends to polished modern interfaces, with attention to detail. Passionate about clean code and functional design.",
+          "hero.cta.projects": "View projects",
+          "hero.cta.contact": "Contact me",
+          "hero.scroll": "Explore",
+          /* About */
+          "about.label": "About me",
+          "about.title": "Code with",
+          "about.title.hl": "purpose",
+          "about.p1": "I'm a software developer with <strong>5+ years of self-taught experience</strong> and currently studying <strong>Web Application Development</strong> to strengthen and formalise my technical knowledge.",
+          "about.p2": "I specialise in <strong>Java</strong>, <strong>Kotlin</strong> and <strong>JavaScript</strong>, building both robust backend applications and modern web interfaces. I particularly enjoy tackling complex problems and turning them into clean, maintainable solutions.",
+          "about.p3": "I'm actively looking to join a team where I can deliver real value from day one, keep growing professionally and work on impactful projects.",
+          "about.v1": "Clean & maintainable code",
+          "about.v2": "Continuous learning",
+          "about.v3": "Attention to detail",
+          "about.v4": "Teamwork",
+          "about.stack.label": "Main stack",
+          "about.cta.talk": "Let's talk",
+          "about.stat1.lbl": "Years coding",
+          "about.stat2.lbl": "Projects",
+          "about.stat3.lbl": "Technologies",
+          "about.stat4.lbl": "Certificates",
+          /* Skills */
+          "skills.label": "Skills",
+          "skills.title": "My",
+          "skills.title.hl": "tech stack",
+          "skills.desc": "Technologies and tools I master to build complete end-to-end solutions.",
+          "skills.langs": "Languages",
+          "skills.frameworks": "Frameworks & Libs",
+          "skills.databases": "Databases",
+          "skills.tools": "Tools",
+          /* Projects */
+          "projects.label": "Projects",
+          "projects.title": "Featured",
+          "projects.title.hl": "work",
+          "projects.desc": "Real projects built with open source code. Filter by technology or explore them all.",
+          "projects.filter.all": "All",
+          "projects.code": "Code",
+          "projects.demo": "Live demo",
+          "projects.featured": "★ Featured",
+          /* Timeline */
+          "tl.label": "Timeline",
+          "tl.title": "My path in",
+          "tl.title.hl": "development",
+          "tl.desc": "From curious self-learner to professional developer with formal technical training.",
+          "tl.ongoing": "Ongoing",
+          "tl.cert": "Certificate",
+          /* Certificates */
+          "certs.label": "Certificates",
+          "certs.title.hl": "accredited",
+          "certs.desc": "Official certifications that validate my knowledge. Click to view the full certificate.",
+          "certs.view": "View certificate",
+          /* Contact */
+          "contact.label": "Contact",
+          "contact.title": "Ready to",
+          "contact.title.hl": "work together",
+          "contact.title.after": "?",
+          "contact.desc": "I'm open to new opportunities, freelance projects and collaborations. Don't hesitate to reach out — I reply within 24h.",
+          "contact.email.desc": "javiergarridoterron@gmail.com",
+          "contact.linkedin.desc": "Connect with me professionally",
+          "contact.github.desc": "Explore my code and projects",
+          "contact.footer": "Have a project in mind or an offer? Write to me directly at",
+        }
+      };
+
+      let currentLang = localStorage.getItem("lang") || "es";
+
+      function applyLang(lang: string) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        localStorage.setItem("lang", lang);
+
+        const t = translations[lang];
+
+        // Update all data-i18n elements
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = (el as HTMLElement).dataset.i18n!;
+          if (t[key] !== undefined) el.innerHTML = t[key];
+        });
+
+        // Update lang toggle button
+        const btn = document.getElementById("lang-toggle");
+        if (btn) {
+          btn.setAttribute("data-lang", lang);
+          btn.querySelector(".lang-label")!.textContent = lang === "es" ? "EN" : "ES";
+        }
+
+        // Update cert card titles in modal context
+        document.querySelectorAll(".cert-card").forEach((card) => {
+          const el = card as HTMLElement;
+          const titleEl = el.querySelector(".cert-card-title");
+          if (titleEl) {
+            titleEl.textContent = lang === "en" ? (el.dataset.titleEn || el.dataset.title!) : el.dataset.title!;
+          }
+        });
+
+        // Notify other components
+        window.dispatchEvent(new CustomEvent("langchange", { detail: { lang } }));
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        applyLang(currentLang);
+
+        const btn = document.getElementById("lang-toggle");
+        btn?.addEventListener("click", () => {
+          applyLang(currentLang === "es" ? "en" : "es");
+        });
+      });
     </script>
   </body>
 </html>
 
 <style is:global>
   :root {
-    /* Background */
     --bg: #050510;
     --bg-secondary: #09091a;
     --bg-card: rgba(14, 14, 35, 0.7);
     --bg-card-hover: rgba(20, 20, 50, 0.85);
-
-    /* Text */
     --text: #eeeef5;
     --text-secondary: #8888b0;
     --text-muted: #55557a;
-
-    /* Accent – vibrant teal + electric indigo */
     --accent: #38bdf8;
     --accent2: #818cf8;
     --accent3: #f472b6;
     --accent-glow: rgba(56, 189, 248, 0.12);
     --accent-hover: #7dd3fc;
-
-    /* Borders */
     --border: rgba(255, 255, 255, 0.055);
     --border-hover: rgba(56, 189, 248, 0.25);
-
-    /* Shape */
     --radius: 18px;
     --radius-sm: 10px;
     --radius-xs: 6px;
@@ -138,7 +334,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   ::-webkit-scrollbar { width: 5px; }
@@ -154,27 +349,66 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     overflow-x: hidden;
   }
 
-  /* Subtle noise texture overlay */
+  /* Subtle noise */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
     opacity: 0.4;
   }
 
-  ::selection { background: var(--accent); color: #050510; }
+  /* Global aurora background */
+  .aurora-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
 
+  .aurora-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .aurora-a {
+    animation: auroraA 18s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+
+  .aurora-b {
+    animation: auroraB 22s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+
+  .aurora-c {
+    animation: auroraC 15s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+
+  @keyframes auroraA {
+    0%   { transform: translate(0,0) scale(1); }
+    100% { transform: translate(80px, -60px) scale(1.15); }
+  }
+  @keyframes auroraB {
+    0%   { transform: translate(0,0) scale(1); }
+    100% { transform: translate(-60px, 80px) scale(1.1); }
+  }
+  @keyframes auroraC {
+    0%   { transform: translate(0,0) scale(1); }
+    100% { transform: translate(50px, -40px) scale(1.2); }
+  }
+
+  ::selection { background: var(--accent); color: #050510; }
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; height: auto; }
 
-  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
-
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
   section { padding: 7rem 0; position: relative; }
 
-  /* Section labels */
   .section-label {
     display: inline-flex;
     align-items: center;
@@ -193,8 +427,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
   .section-label::before {
     content: '';
-    width: 5px;
-    height: 5px;
+    width: 5px; height: 5px;
     border-radius: 50%;
     background: var(--accent);
     flex-shrink: 0;
@@ -217,7 +450,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     font-weight: 400;
   }
 
-  /* Gradient text */
   .gradient-text {
     background: linear-gradient(120deg, var(--accent) 0%, var(--accent2) 60%, var(--accent3) 100%);
     -webkit-background-clip: text;
@@ -225,28 +457,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     background-clip: text;
   }
 
-  /* Reveal animations */
-  .reveal {
-    opacity: 0;
-    transform: translateY(36px);
-    transition: opacity 0.75s ease, transform 0.75s ease;
-  }
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .reveal.revealed { opacity: 1; transform: translateY(0); }
 
-  .reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .reveal-stagger > * {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.55s ease, transform 0.55s ease;
-  }
-
-  .reveal-stagger.revealed > * {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal-stagger > * { opacity: 0; transform: translateY(28px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal-stagger.revealed > * { opacity: 1; transform: translateY(0); }
 
   .reveal-stagger > *:nth-child(1) { transition-delay: 0s; }
   .reveal-stagger > *:nth-child(2) { transition-delay: 0.08s; }
@@ -262,10 +478,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   /* Back to top */
   #back-to-top {
     position: fixed;
-    bottom: 1.75rem;
-    right: 1.75rem;
-    width: 44px;
-    height: 44px;
+    bottom: 1.75rem; right: 1.75rem;
+    width: 44px; height: 44px;
     border-radius: 12px;
     background: rgba(14, 14, 35, 0.85);
     border: 1px solid var(--border);
@@ -281,21 +495,36 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     backdrop-filter: blur(16px);
   }
 
-  #back-to-top.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  #back-to-top.visible { opacity: 1; transform: translateY(0); }
+  #back-to-top:hover { border-color: var(--accent); color: var(--accent); background: rgba(56, 189, 248, 0.08); }
 
-  #back-to-top:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(56, 189, 248, 0.08);
-  }
-
-  /* Mono font for code-like elements */
-  .mono {
+  /* Language toggle */
+  #lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+    background: rgba(56, 189, 248, 0.06);
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    color: var(--text-muted);
+    cursor: pointer;
     font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: all 0.3s;
   }
+
+  #lang-toggle:hover {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.3);
+    color: var(--accent);
+  }
+
+  #lang-toggle .lang-flag { font-size: 0.9rem; }
+
+  .mono { font-family: 'JetBrains Mono', monospace; }
 
   @media (max-width: 640px) {
     section { padding: 5rem 0; }

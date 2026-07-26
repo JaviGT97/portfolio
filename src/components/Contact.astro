@@ -1,9 +1,13 @@
 <section id="contact">
   <div class="container">
     <div class="reveal">
-      <span class="section-label">Contacto</span>
-      <h2 class="section-title">¿Listo para <span class="gradient-text">trabajar juntos</span>?</h2>
-      <p class="section-desc">Estoy abierto a nuevas oportunidades, proyectos freelance y colaboraciones. No dudes en escribirme — respondo en menos de 24h.</p>
+      <span class="section-label" data-i18n="contact.label">Contacto</span>
+      <h2 class="section-title">
+        <span data-i18n="contact.title">¿Listo para</span>
+        <span class="gradient-text" data-i18n="contact.title.hl"> trabajar juntos</span>
+        <span data-i18n="contact.title.after">?</span>
+      </h2>
+      <p class="section-desc" data-i18n="contact.desc">Estoy abierto a nuevas oportunidades, proyectos freelance y colaboraciones. No dudes en escribirme — respondo en menos de 24h.</p>
     </div>
 
     <div class="contact-grid">
@@ -14,7 +18,7 @@
         </div>
         <div class="contact-text">
           <h3>Email</h3>
-          <p class="mono">javiergarridoterron@gmail.com</p>
+          <p class="mono" data-i18n="contact.email.desc">javiergarridoterron@gmail.com</p>
         </div>
         <span class="contact-arrow">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -28,7 +32,7 @@
         </div>
         <div class="contact-text">
           <h3>LinkedIn</h3>
-          <p>Conecta conmigo profesionalmente</p>
+          <p data-i18n="contact.linkedin.desc">Conecta conmigo profesionalmente</p>
         </div>
         <span class="contact-arrow">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -42,7 +46,7 @@
         </div>
         <div class="contact-text">
           <h3>GitHub</h3>
-          <p>Explora mi código y proyectos</p>
+          <p data-i18n="contact.github.desc">Explora mi código y proyectos</p>
         </div>
         <span class="contact-arrow">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -51,7 +55,9 @@
     </div>
 
     <div class="contact-footer reveal" style="transition-delay: 0.3s;">
-      <p>¿Tienes un proyecto en mente o una oferta? Escríbeme directamente a <a href="mailto:javiergarridoterron@gmail.com" class="footer-email">javiergarridoterron@gmail.com</a></p>
+      <p><span data-i18n="contact.footer">¿Tienes un proyecto en mente o una oferta? Escríbeme directamente a</span>
+        <a href="mailto:javiergarridoterron@gmail.com" class="footer-email"> javiergarridoterron@gmail.com</a>
+      </p>
     </div>
   </div>
 </section>
@@ -77,18 +83,10 @@
     gap: 1rem;
   }
 
-  .card-glow {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.4s;
-    pointer-events: none;
-  }
-
-  .card-glow--email   { background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.07), transparent 65%); }
-  .card-glow--linkedin { background: radial-gradient(circle at 50% 0%, rgba(0, 119, 181, 0.07), transparent 65%); }
-  .card-glow--github  { background: radial-gradient(circle at 50% 0%, rgba(129, 140, 248, 0.07), transparent 65%); }
-
+  .card-glow { position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+  .card-glow--email   { background: radial-gradient(circle at 50% 0%, rgba(56,189,248,0.07), transparent 65%); }
+  .card-glow--linkedin { background: radial-gradient(circle at 50% 0%, rgba(0,119,181,0.07), transparent 65%); }
+  .card-glow--github  { background: radial-gradient(circle at 50% 0%, rgba(129,140,248,0.07), transparent 65%); }
   .contact-card:hover .card-glow { opacity: 1; }
 
   .contact-card::before {
@@ -101,90 +99,46 @@
     transition: transform 0.4s;
   }
 
-  .contact-card--email::before   { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .contact-card--email::before    { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
   .contact-card--linkedin::before { background: linear-gradient(90deg, #0077b5, #00a0dc); }
-  .contact-card--github::before  { background: linear-gradient(90deg, var(--accent2), var(--accent3)); }
-
+  .contact-card--github::before   { background: linear-gradient(90deg, var(--accent2), var(--accent3)); }
   .contact-card:hover::before { transform: scaleX(1); }
 
-  .contact-card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-6px);
-    background: var(--bg-card-hover);
-  }
+  .contact-card:hover { border-color: var(--border-hover); transform: translateY(-6px); background: var(--bg-card-hover); }
 
   .contact-icon {
-    width: 50px; height: 50px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.12);
-    color: var(--accent);
-    transition: all 0.3s;
+    width: 50px; height: 50px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.12);
+    color: var(--accent); transition: all 0.3s;
   }
 
-  .contact-card--linkedin .contact-icon { background: rgba(0, 119, 181, 0.08); border-color: rgba(0, 119, 181, 0.12); color: #0ea5e9; }
-  .contact-card--github .contact-icon   { background: rgba(129, 140, 248, 0.08); border-color: rgba(129, 140, 248, 0.12); color: var(--accent2); }
-
+  .contact-card--linkedin .contact-icon { background: rgba(0,119,181,0.08); border-color: rgba(0,119,181,0.12); color: #0ea5e9; }
+  .contact-card--github .contact-icon { background: rgba(129,140,248,0.08); border-color: rgba(129,140,248,0.12); color: var(--accent2); }
   .contact-card:hover .contact-icon { transform: scale(1.08); }
 
   .contact-text { flex: 1; }
+  .contact-text h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--text); }
+  .contact-text p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; font-weight: 400; }
 
-  .contact-text h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.3rem;
-    color: var(--text);
-  }
+  .contact-arrow { color: var(--text-muted); transition: all 0.3s; align-self: flex-end; display: flex; }
+  .contact-card:hover .contact-arrow { color: var(--accent); transform: translateX(4px); }
 
-  .contact-text p {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-    font-weight: 400;
-  }
-
-  .contact-arrow {
-    color: var(--text-muted);
-    transition: all 0.3s;
-    align-self: flex-end;
-    display: flex;
-  }
-
-  .contact-card:hover .contact-arrow {
-    color: var(--accent);
-    transform: translateX(4px);
-  }
-
-  /* Footer invite */
   .contact-footer {
-    text-align: center;
-    padding: 2rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    text-align: center; padding: 2rem;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
   }
 
-  .contact-footer p {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-  }
+  .contact-footer p { font-size: 1rem; color: var(--text-secondary); line-height: 1.7; }
 
   .footer-email {
-    color: var(--accent);
-    font-weight: 600;
+    color: var(--accent); font-weight: 600;
+    text-underline-offset: 3px; text-decoration: underline;
+    text-decoration-color: rgba(56,189,248,0.35);
     transition: color 0.3s;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-color: rgba(56, 189, 248, 0.35);
   }
 
   .footer-email:hover { color: var(--accent-hover); }
 
-  @media (max-width: 900px) {
-    .contact-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
 </style>

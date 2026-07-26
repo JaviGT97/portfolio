@@ -4,72 +4,72 @@
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
     <div class="grid-lines"></div>
+    <!-- Floating code snippets -->
+    <div class="code-float cf1 mono">&lt;dev /&gt;</div>
+    <div class="code-float cf2 mono">&#123; code &#125;</div>
+    <div class="code-float cf3 mono">npm run build</div>
+    <div class="code-float cf4 mono">git push</div>
   </div>
 
   <div class="container hero-content">
     <div class="hero-text">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        Disponible para nuevas oportunidades
+        <span data-i18n="hero.available">Disponible para nuevas oportunidades</span>
       </div>
-      <p class="hero-greeting mono">&gt; Hola, soy</p>
+      <p class="hero-greeting mono">&gt; <span data-i18n="hero.greeting">Hola, soy</span></p>
       <h1>
         <span class="name-first">Javier Garrido</span>
         <span class="name-last gradient-text">Terrón</span>
       </h1>
       <div class="typing-wrapper">
-        <span class="typing-static">Desarrollador</span>
+        <span class="typing-static" data-i18n="hero.developer">Desarrollador</span>
         <span class="typing-dynamic" id="typing"></span>
         <span class="typing-cursor">|</span>
       </div>
-      <p class="hero-desc">
+      <p class="hero-desc" data-i18n="hero.desc">
         Construyo software que importa — desde backends robustos hasta interfaces
         modernas con atención al detalle. Apasionado por el código limpio y el diseño funcional.
       </p>
       <div class="hero-actions">
         <a href="#projects" class="btn btn-primary">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
-          Ver proyectos
+          <span data-i18n="hero.cta.projects">Ver proyectos</span>
         </a>
         <a href="#contact" class="btn btn-outline">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Contactar
+          <span data-i18n="hero.cta.contact">Contactar</span>
         </a>
         <a href="https://github.com/JaviGT97" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" title="GitHub">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
         </a>
       </div>
-    </div>
 
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-val">5+</span>
-        <span class="stat-lbl">Años programando</span>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat">
-        <span class="stat-val">10+</span>
-        <span class="stat-lbl">Proyectos realizados</span>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat">
-        <span class="stat-val">9+</span>
-        <span class="stat-lbl">Tecnologías</span>
+      <!-- Animated scroll hint -->
+      <div class="scroll-hint">
+        <div class="scroll-line"></div>
+        <span data-i18n="hero.scroll">Explora</span>
       </div>
     </div>
   </div>
 </section>
 
 <script>
-  const words = ["Full Stack", "de Software", "Backend", "Frontend", "Multiplataforma"];
+  const wordsES = ["Full Stack", "de Software", "Backend", "Frontend", "Multiplataforma"];
+  const wordsEN = ["Full Stack", "Software", "Backend", "Frontend", "Cross-Platform"];
   let wordIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
   const el = document.getElementById("typing");
 
+  function getWords() {
+    return document.documentElement.lang === 'en' ? wordsEN : wordsES;
+  }
+
   function typeEffect() {
     if (!el) return;
-    const current = words[wordIndex];
+    const words = getWords();
+    const current = words[wordIndex % words.length];
     if (!isDeleting) {
       el.textContent = current.substring(0, charIndex + 1);
       charIndex++;
@@ -149,6 +149,28 @@
       linear-gradient(90deg, rgba(56, 189, 248, 0.025) 1px, transparent 1px);
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%);
+  }
+
+  /* Floating code snippets */
+  .code-float {
+    position: absolute;
+    font-size: 0.7rem;
+    color: rgba(56, 189, 248, 0.15);
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    user-select: none;
+    animation: floatCode 20s infinite ease-in-out;
+  }
+
+  .cf1 { top: 18%; right: 12%; animation-delay: 0s;   animation-duration: 22s; }
+  .cf2 { top: 65%; right: 6%;  animation-delay: -5s;  animation-duration: 18s; }
+  .cf3 { top: 35%; right: 28%; animation-delay: -11s; animation-duration: 24s; }
+  .cf4 { top: 78%; right: 20%; animation-delay: -7s;  animation-duration: 20s; }
+
+  @keyframes floatCode {
+    0%, 100% { transform: translateY(0) rotate(-1deg); opacity: 0.5; }
+    25%       { transform: translateY(-12px) rotate(1deg); opacity: 0.8; }
+    75%       { transform: translateY(10px) rotate(-2deg); opacity: 0.3; }
   }
 
   @keyframes drift {
@@ -236,18 +258,8 @@
   }
 
   .typing-static { font-weight: 500; }
-
-  .typing-dynamic {
-    color: var(--accent);
-    font-weight: 700;
-    min-width: 20px;
-  }
-
-  .typing-cursor {
-    color: var(--accent);
-    font-weight: 300;
-    animation: blink 1s step-end infinite;
-  }
+  .typing-dynamic { color: var(--accent); font-weight: 700; min-width: 20px; }
+  .typing-cursor { color: var(--accent); font-weight: 300; animation: blink 1s step-end infinite; }
 
   @keyframes blink { 50% { opacity: 0; } }
 
@@ -290,10 +302,7 @@
     box-shadow: 0 4px 24px rgba(56, 189, 248, 0.25);
   }
 
-  .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(56, 189, 248, 0.35);
-  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(56, 189, 248, 0.35); }
 
   .btn-outline {
     background: transparent;
@@ -301,12 +310,7 @@
     border-color: var(--border);
   }
 
-  .btn-outline:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(56, 189, 248, 0.06);
-    transform: translateY(-3px);
-  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(56, 189, 248, 0.06); transform: translateY(-3px); }
 
   .btn-ghost {
     padding: 0.8rem;
@@ -315,59 +319,36 @@
     border-color: var(--border);
   }
 
-  .btn-ghost:hover {
-    color: var(--text);
-    border-color: var(--border-hover);
-    background: rgba(255,255,255,0.04);
-    transform: translateY(-2px);
-  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--border-hover); background: rgba(255,255,255,0.04); transform: translateY(-2px); }
 
-  /* Stats bar */
-  .hero-stats {
-    display: inline-flex;
+  /* Scroll hint */
+  .scroll-hint {
+    display: flex;
     align-items: center;
-    gap: 2rem;
-    margin-top: 4rem;
-    padding: 1.2rem 2rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    backdrop-filter: blur(12px);
-    animation: fadeUp 0.6s ease 0.65s both;
+    gap: 0.75rem;
+    margin-top: 3.5rem;
+    animation: fadeUp 0.6s ease 0.7s both;
   }
 
-  .stat { display: flex; flex-direction: column; }
-
-  .stat-val {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: var(--accent);
-    letter-spacing: -0.02em;
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    position: relative;
   }
 
-  .stat-lbl {
+  .scroll-hint span {
     font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
     color: var(--text-muted);
-    margin-top: 0.1rem;
-    font-weight: 500;
-  }
-
-  .stat-sep {
-    width: 1px;
-    height: 36px;
-    background: var(--border);
   }
 
   @media (max-width: 640px) {
-    .hero-stats {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-      width: 100%;
-    }
-    .stat-sep { display: none; }
     .hero-actions { flex-direction: column; align-items: stretch; }
     .btn { justify-content: center; }
     .btn-ghost { align-self: center; width: 44px; height: 44px; justify-content: center; }
+    .code-float { display: none; }
   }
 </style>

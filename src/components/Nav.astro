@@ -4,18 +4,22 @@
     <a href="#hero" class="logo">
       <span class="logo-bracket">&lt;</span>JG<span class="logo-bracket">/&gt;</span>
     </a>
-    <button class="hamburger" id="hamburger" aria-label="Menú de navegación">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+    <div class="nav-right">
+      <button id="lang-toggle" aria-label="Switch language">
+        <span class="lang-flag">🌐</span>
+        <span class="lang-label">EN</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menú de navegación">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
     <div class="nav-links" id="nav-links">
-      <a href="#about" class="nav-link">Sobre mí</a>
-      <a href="#skills" class="nav-link">Skills</a>
-      <a href="#projects" class="nav-link">Proyectos</a>
-      <a href="#timeline" class="nav-link">Trayectoria</a>
-      <a href="#certificates" class="nav-link">Certificados</a>
-      <a href="#contact" class="nav-link nav-cta">Contactar</a>
+      <a href="#about"        class="nav-link" data-i18n="nav.about">Sobre mí</a>
+      <a href="#skills"       class="nav-link" data-i18n="nav.skills">Skills</a>
+      <a href="#projects"     class="nav-link" data-i18n="nav.projects">Proyectos</a>
+      <a href="#timeline"     class="nav-link" data-i18n="nav.timeline">Trayectoria</a>
+      <a href="#certificates" class="nav-link" data-i18n="nav.certs">Certificados</a>
+      <a href="#contact"      class="nav-link nav-cta" data-i18n="nav.contact">Contactar</a>
     </div>
   </div>
 </nav>
@@ -30,7 +34,6 @@
       navLinks.classList.toggle("open");
       document.body.classList.toggle("nav-open");
     });
-
     document.querySelectorAll(".nav-link").forEach((link) => {
       link.addEventListener("click", () => {
         hamburger.classList.remove("active");
@@ -51,13 +54,11 @@
     -webkit-backdrop-filter: blur(24px) saturate(1.8);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
-    transition: background 0.3s;
   }
 
   #scroll-progress {
     position: absolute;
-    bottom: -1px;
-    left: 0;
+    bottom: -1px; left: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
     width: 0%;
@@ -79,14 +80,15 @@
     color: var(--text);
     font-family: 'JetBrains Mono', monospace;
     transition: color 0.3s;
+    flex-shrink: 0;
   }
 
-  .logo-bracket {
-    color: var(--accent);
-  }
+  .logo-bracket { color: var(--accent); }
 
-  .logo:hover .logo-bracket {
-    color: var(--accent2);
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
   }
 
   .hamburger {
@@ -94,19 +96,16 @@
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    width: 32px;
-    height: 32px;
+    width: 32px; height: 32px;
     background: none;
     border: none;
     cursor: pointer;
     padding: 4px;
-    z-index: 1001;
   }
 
   .hamburger span {
     display: block;
-    width: 100%;
-    height: 2px;
+    width: 100%; height: 2px;
     background: var(--text);
     border-radius: 2px;
     transition: all 0.3s;
@@ -134,26 +133,16 @@
   .nav-link::after {
     content: '';
     position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1.5px;
+    bottom: -4px; left: 0;
+    width: 0; height: 1.5px;
     background: var(--accent);
     transition: width 0.3s;
     border-radius: 1px;
   }
 
-  .nav-link:hover,
-  .nav-link.active {
-    color: var(--text);
-  }
+  .nav-link:hover, .nav-link.active { color: var(--text); }
+  .nav-link.active::after, .nav-link:hover::after { width: 100%; }
 
-  .nav-link.active::after,
-  .nav-link:hover::after {
-    width: 100%;
-  }
-
-  /* CTA button in nav */
   .nav-cta {
     padding: 0.45rem 1.15rem;
     border-radius: 8px;
@@ -164,22 +153,15 @@
   }
 
   .nav-cta::after { display: none; }
-
-  .nav-cta:hover {
-    background: rgba(56, 189, 248, 0.14) !important;
-    border-color: rgba(56, 189, 248, 0.4) !important;
-    transform: translateY(-1px);
-  }
+  .nav-cta:hover { background: rgba(56, 189, 248, 0.14) !important; border-color: rgba(56, 189, 248, 0.4) !important; transform: translateY(-1px); }
 
   @media (max-width: 768px) {
     .hamburger { display: flex; }
 
     .nav-links {
       position: fixed;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100vh;
+      top: 0; right: 0;
+      width: 100%; height: 100vh;
       background: rgba(5, 5, 16, 0.97);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
@@ -193,7 +175,6 @@
     }
 
     .nav-links.open { transform: translateX(0); }
-
     .nav-link { font-size: 1.2rem; font-weight: 600; }
     .nav-cta { font-size: 1.2rem; padding: 0.7rem 2rem; }
   }
