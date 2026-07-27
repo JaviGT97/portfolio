@@ -32,14 +32,22 @@
   const indicator = document.getElementById('nav-indicator');
   const navLinksArr = navLinks ? Array.from(navLinks.querySelectorAll('.nav-link')) : [];
 
+  const logo = document.querySelector('.logo');
+
   function animateNavIndicator(activeIndex = 0) {
-    if (!indicator || !navLinks || navLinks.classList.contains('open')) return;
-    const activeLink = navLinksArr[activeIndex];
-    if (!activeLink) return;
-    const linkRect = activeLink.getBoundingClientRect();
-    const navRect = navLinks.getBoundingClientRect();
-    indicator.style.left = `${linkRect.left - navRect.left}px`;
-    indicator.style.width = `${linkRect.width}px`;
+    if (!indicator || navLinks.classList.contains('open')) return;
+    const innerRect = document.querySelector('.nav-inner').getBoundingClientRect();
+    if (activeIndex === 0) {
+      const logoRect = logo.getBoundingClientRect();
+      indicator.style.left = `${logoRect.left - innerRect.left}px`;
+      indicator.style.width = `${logoRect.width}px`;
+    } else {
+      const activeLink = navLinksArr[activeIndex - 1];
+      if (!activeLink) return;
+      const linkRect = activeLink.getBoundingClientRect();
+      indicator.style.left = `${linkRect.left - innerRect.left}px`;
+      indicator.style.width = `${linkRect.width}px`;
+    }
     indicator.style.opacity = '1';
   }
 
@@ -58,9 +66,17 @@
         hamburger.classList.remove('active');
         navLinks.classList.remove('open');
         document.body.classList.remove('nav-open');
-        requestAnimationFrame(() => animateNavIndicator(index));
+        requestAnimationFrame(() => animateNavIndicator(index + 1));
       });
     });
+
+    if (logo) {
+      logo.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        requestAnimationFrame(() => animateNavIndicator(0));
+      });
+    }
 
     let currentSectionIndex = 0;
     const sections = document.querySelectorAll('section[id]');
